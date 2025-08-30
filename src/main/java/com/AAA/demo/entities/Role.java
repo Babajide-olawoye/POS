@@ -27,12 +27,27 @@ public class Role {
     )
     private String name;
 
-    public void setName(String name) {
+    public String getName() {
+        return name;
+    }
 
-        if(name.equalsIgnoreCase("Admin") || name.equalsIgnoreCase("Technician") || name.equalsIgnoreCase("User"))
-        this.name = name;
-        else
-            this.name = "Invalid";
+    public void setName(String name) {
+        if (name != null) {
+            String trimmed = name.trim();
+            if (trimmed.equalsIgnoreCase("Admin")) {
+                this.name = "Admin";
+                return;
+            }
+            if (trimmed.equalsIgnoreCase("Technician")) {
+                this.name = "Technician";
+                return;
+            }
+            if (trimmed.equalsIgnoreCase("User")) {
+                this.name = "User";
+                return;
+            }
+        }
+        this.name = "Invalid";
     }
 
 
