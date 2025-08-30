@@ -16,10 +16,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping({"/api/users"})
 public class UserController {
+    private final UserService userService;
     @Autowired
-    private UserService userService;
-
-    public UserController() {
+    public UserController(UserService service) {
+        this.userService = service;
     }
 
     /**

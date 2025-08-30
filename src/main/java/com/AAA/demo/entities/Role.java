@@ -23,7 +23,7 @@ public class Role {
      * @param name proposed role name
      */
     public void setName(String name) {
-        if(name.equalsIgnoreCase("Admin") || name.equalsIgnoreCase("Technician") || name.equalsIgnoreCase("User"))
+        if(name.equalsIgnoreCase("Admin") || name.equalsIgnoreCase("Technician") || name.equalsIgnoreCase("Cashier"))
             this.name = name;
         else
             this.name = "Invalid";

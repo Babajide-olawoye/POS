@@ -1,0 +1,75 @@
+package com.AAA.demo.entities;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+import java.math.BigDecimal;
+
+@Table("products")
+public class Product {
+
+    @Id
+    private Long id;
+
+
+    private String sku;
+
+    private String name;
+    private BigDecimal cost_price;
+
+    private BigDecimal price;
+
+    @Column("stock_quantity")
+    private Integer stock;
+
+    // ---- Getters & Setters ----
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getCost_price() {
+        return cost_price;
+    }
+
+    public void setCost_price(BigDecimal cost_price) {
+        this.cost_price = cost_price;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+}
