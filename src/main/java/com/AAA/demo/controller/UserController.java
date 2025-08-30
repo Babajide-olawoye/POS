@@ -1,5 +1,6 @@
 package com.AAA.demo.controller;
 
+import com.AAA.demo.dto.UserDto;
 import com.AAA.demo.entities.User;
 import com.AAA.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,26 +26,28 @@ public class UserController {
      * Returns a list of all users.
      */
     @GetMapping
-    public List<User> getAllUsers() {
-        return this.userService.getAll();
+    public List<UserDto> getAllUsers() {
+        return this.userService.getAll().stream().map(UserDto::fromUser).toList();
     }
 
     /**
      * Retrieves a user by id.
      */
     @GetMapping({"/{id}"})
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         Optional<User> user = this.userService.getById(id);
-        return user.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        return user.map(UserDto::fromUser)
+                   .map(ResponseEntity::ok)
+                   .orElse(ResponseEntity.notFound().build());
     }
 
     /**
      * Creates a new user record.
      */
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = this.userService.create(user);
-        return ResponseEntity.ok(createdUser);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+        User createdUser = this.userService.create(userDto.toUser());
+        return ResponseEntity.ok(UserDto.fromUser(createdUser));
     }
 
     /**
