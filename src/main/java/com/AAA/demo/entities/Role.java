@@ -1,27 +1,20 @@
 package com.AAA.demo.entities;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * Entity representing a user role within the system.
- * <p>
- * Roles are stored in the {@code roles} table and are used to
- * grant authorities to {@link com.AAA.demo.entities.User} instances.
  */
-@Entity
-@Table(name = "roles")
+@Table("roles")
 public class Role {
-    @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
     /** Identifier for the role. */
+    @Id
     private Long id;
 
     /**
      * Name of the role. Must be unique and one of Admin, Technician or User.
      */
-    @Column(nullable = false, unique = true)
     private String name;
 
     /**
@@ -35,5 +28,4 @@ public class Role {
         else
             this.name = "Invalid";
     }
-
 }

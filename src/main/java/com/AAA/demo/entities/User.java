@@ -1,45 +1,40 @@
 package com.AAA.demo.entities;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
 
 /**
  * Entity representing an application user.
  */
-@Entity
-@Table(name = "users")
+@Table("users")
 public class User {
-    @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
     /** Identifier for the user. */
+    @Id
     private Long id;
 
     /** Full name of the user. */
-    @Column(nullable = false)
     private String name;
 
     /** Unique email address used for login. */
-    @Column(nullable = false, unique = true)
     private String email;
 
     /** BCrypt hashed password. */
-    @Column(nullable = false)
+    @Column("password_hash")
     private String passwordHash;
 
-    /** Associated {@link Role} for this user. */
-    @OneToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    /** Identifier of the associated role. */
+    @Column("role_id")
+    private Long roleId;
 
     /** Date the user was created. */
-    @Column
+    @Column("start_date")
     private LocalDate startDate = LocalDate.now();
 
     /** Last time the user was updated. */
-    @Column(nullable = false, name = "last_updated")
+    @Column("last_updated")
     private LocalDate updatedDate = LocalDate.now();
 
     public Long getId() {
@@ -66,12 +61,12 @@ public class User {
         this.email = email;
     }
 
-    public Role getRole() {
-        return role;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public LocalDate getStartDate() {
