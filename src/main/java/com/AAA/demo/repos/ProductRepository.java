@@ -1,18 +1,21 @@
 package com.AAA.demo.repos;
 
 import com.AAA.demo.entities.Product;
-import org.springframework.data.repository.ListPagingAndSortingRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
-import java.util.List;
+/**
+ * Repository for {@link Product} entities.
+ * <p>
+ * Extends {@link ListCrudRepository} to provide basic CRUD operations and
+ * exposes a finder for looking up products by name.
+ */
+public interface ProductRepository extends ListCrudRepository<Product, Long> {
 
-public interface ProductRepository extends ListPagingAndSortingRepository<Product, Integer> {
-
-    List<Product> findAll();
-
-    Product findById(Long id);
+    /**
+     * Retrieves a product by its name.
+     *
+     * @param name product name
+     * @return matching product or {@code null} if none found
+     */
     Product findByName(String name);
-
-    Object save(Product product);
-
-    void deleteById(Long id);
 }

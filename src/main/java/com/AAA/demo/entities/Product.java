@@ -6,6 +6,11 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 
+/**
+ * Entity representing a product in the inventory.
+ * <p>
+ * Mapped to the {@code products} table and used for stock management.
+ */
 @Table("products")
 public class Product {
 
