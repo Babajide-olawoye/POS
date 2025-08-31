@@ -2,7 +2,6 @@ package com.AAA.demo.service;
 
 import com.AAA.demo.entities.User;
 import com.AAA.demo.repos.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +13,19 @@ import java.util.Optional;
  */
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    public UserService() {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    /**
+     * Creates the service with required dependencies.
+     *
+     * @param userRepository repository for user persistence
+     * @param passwordEncoder encoder for hashing passwords
+     */
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
