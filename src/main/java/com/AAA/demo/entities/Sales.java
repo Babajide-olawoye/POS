@@ -29,7 +29,7 @@ public class Sales {
     @Column("payment_method")
     private String paymentMethod;
 
-    @Column("created_at")
+    @Column("updated_by")
     private Instant createdAt;
 
     // sale_items.sale_id is the FK; JDBC fills it when saving via the root
