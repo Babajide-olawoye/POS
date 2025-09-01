@@ -29,11 +29,11 @@ public class Sales {
     @Column("payment_method")
     private String paymentMethod;
 
-    @Column("updated_by")
+    @Column("created_at")
     private Instant createdAt;
 
     // sale_items.sale_id is the FK; JDBC fills it when saving via the root
-    @MappedCollection(idColumn = "sale_id")
+    @MappedCollection(idColumn = "sale_id", keyColumn = "sales_key")
     private List<SaleItem> items = new ArrayList<>();
 
     // ---- getters/setters ----
