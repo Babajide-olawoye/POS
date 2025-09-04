@@ -8,38 +8,31 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 
-@Table("sale_items")
-public class SaleItem {
-
+@Table("refund_items")
+public class RefundItem {
     @Id
     private Long id;
 
-    // Reference other aggregate by ID (no @ManyToOne)
     @Column("product_id")
     private Long productId;
 
-    private int quantity;
+    private Integer quantity;
 
     @Column("unit_price")
     private BigDecimal unitPrice;
 
-    // Your schema used "subtotal" — keep it, but use BigDecimal for money
-    @Column("subtotal")
+    @Column("itemTotal")
     private BigDecimal itemTotal;
 
-    // ---- getters/setters ----
+    // getters/setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
     public Long getProductId() { return productId; }
     public void setProductId(Long productId) { this.productId = productId; }
-
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
-
+    public Integer getQuantity() { return quantity; }
+    public void setQuantity(Integer quantity) { this.quantity = quantity; }
     public BigDecimal getUnitPrice() { return unitPrice; }
     public void setUnitPrice(BigDecimal unitPrice) { this.unitPrice = unitPrice; }
-
     public BigDecimal getItemTotal() { return itemTotal; }
     public void setItemTotal(BigDecimal itemTotal) { this.itemTotal = itemTotal; }
 }

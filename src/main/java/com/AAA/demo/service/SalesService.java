@@ -56,7 +56,7 @@ public class SalesService {
             si.setProductId(p.getId());
             si.setQuantity(it.quantity());
             si.setUnitPrice(unitPrice);
-            si.setSubtotal(lineTotal);
+            si.setItemTotal(lineTotal);
             items.add(si);
 
             subtotal = subtotal.add(lineTotal);
@@ -99,7 +99,7 @@ public class SalesService {
         si.setProductId(p.getId());
         si.setQuantity(dto.quantity());
         si.setUnitPrice(unitPrice);
-        si.setSubtotal(lineTotal);
+        si.setItemTotal(lineTotal);
 
         sale.getItems().add(si);
         // update totals
@@ -130,7 +130,7 @@ public class SalesService {
 
     private static void recalcTotals(Sales sale) {
         BigDecimal subtotal = sale.getItems().stream()
-                .map(SaleItem::getSubtotal)
+                .map(SaleItem::getItemTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         sale.setSubtotal(subtotal);
@@ -150,7 +150,7 @@ public class SalesService {
                         i.getProductId(),
                         i.getQuantity(),
                         i.getUnitPrice(),
-                        i.getSubtotal()
+                        i.getItemTotal()
                 )).toList();
 
         return new SalesViewDto(
