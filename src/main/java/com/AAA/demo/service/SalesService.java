@@ -17,6 +17,12 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles business logic around sales and their line items.
+ * <p>
+ * Provides operations to create sales transactions, add and remove items,
+ * and keeps monetary totals consistent.
+ */
 @Service
 public class SalesService {
     private final SalesRepository salesRepository;
@@ -27,7 +33,13 @@ public class SalesService {
         this.productRepo = productRepo;
     }
 
-    // ----- CREATE SALE (with items) -----
+    /**
+     * Creates a new {@link Sales} record along with its line items.
+     *
+     * @param dto details describing the sale and its items
+     * @return a view of the persisted sale
+     * @throws IllegalArgumentException if no items are supplied or data is invalid
+     */
     @Transactional
     public SalesViewDto createSale(CreateSaleDto dto) {
         if (dto.items() == null || dto.items().isEmpty()) {
@@ -75,7 +87,14 @@ public class SalesService {
         return toView(saved);
     }
 
-    // ----- ADD ONE ITEM TO EXISTING SALE -----
+    /**
+     * Adds a single item to an existing sale and updates totals.
+     *
+     * @param saleId identifier of the sale to update
+     * @param dto    new item information
+     * @return updated sale view
+     * @throws IllegalArgumentException if the sale or product cannot be found
+     */
     @Transactional
     public SalesViewDto addItem(Long saleId, CreateSaleItem dto) {
         Sales sale = salesRepository.findById(saleId)
@@ -109,7 +128,14 @@ public class SalesService {
         return toView(saved);
     }
 
-    // ----- DELETE ONE ITEM FROM SALE -----
+    /**
+     * Deletes an item from the specified sale.
+     *
+     * @param saleId      sale identifier
+     * @param saleItemId  line item identifier
+     * @return updated sale view after the item is removed
+     * @throws IllegalArgumentException if the sale or item cannot be found
+     */
     @Transactional
     public SalesViewDto deleteItem(Long saleId, Long saleItemId) {
         Sales sale = salesRepository.findById(saleId)
@@ -128,6 +154,12 @@ public class SalesService {
     // ----- helpers -----
     private static BigDecimal nvl(BigDecimal v) { return v != null ? v : BigDecimal.ZERO; }
 
+    /**
+     * Recalculates subtotal, discount, tax, and final amount for a sale based on
+     * its current list of items and financial adjustments.
+     *
+     * @param sale the sale to update
+     */
     private static void recalcTotals(Sales sale) {
         BigDecimal subtotal = sale.getItems().stream()
                 .map(SaleItem::getItemTotal)
