@@ -3,8 +3,10 @@ package com.AAA.demo.controller;
 import com.AAA.demo.dto.UserDto;
 import com.AAA.demo.entities.User;
 import com.AAA.demo.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping({"/api/users"})
+@Validated
 public class UserController {
     private final UserService userService;
     @Autowired
@@ -45,7 +48,7 @@ public class UserController {
      * Creates a new user record.
      */
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto) {
         User createdUser = this.userService.create(userDto.toUser());
         return ResponseEntity.ok(UserDto.fromUser(createdUser));
     }

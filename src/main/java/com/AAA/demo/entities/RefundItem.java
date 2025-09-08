@@ -21,7 +21,7 @@ public class RefundItem {
     @Column("unit_price")
     private BigDecimal unitPrice;
 
-    @Column("itemTotal")
+    @Column("item_total")
     private BigDecimal itemTotal;
 
     // getters/setters

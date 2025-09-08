@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+//import java.math.RoundingMode;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -172,8 +173,6 @@ public class SalesService {
                 .divide(BigDecimal.valueOf(100));
         sale.setFinalAmount(afterDiscount.add(taxAmount));
     }
-
-    private static BigDecimal nvl(BigDecimal v1, BigDecimal v2) { return v1 != null ? v1 : v2; }
 
     private static SalesViewDto toView(Sales sale) {
         List<SaleItemsViewDto> itemViews = sale.getItems().stream()

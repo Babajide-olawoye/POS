@@ -21,7 +21,7 @@ public class Product {
     private String sku;
 
     private String name;
-    private BigDecimal cost_price;
+    private BigDecimal costPrice;
 
     private BigDecimal price;
 
@@ -54,12 +54,12 @@ public class Product {
         this.name = name;
     }
 
-    public BigDecimal getCost_price() {
-        return cost_price;
+    public BigDecimal getCostPrice() {
+        return costPrice;
     }
 
-    public void setCost_price(BigDecimal cost_price) {
-        this.cost_price = cost_price;
+    public void setCostPrice(BigDecimal costPrice) {
+        this.costPrice = costPrice;
     }
 
     public BigDecimal getPrice() {

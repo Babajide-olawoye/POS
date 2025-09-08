@@ -13,7 +13,7 @@ public class Role {
     private Long id;
 
     /**
-     * Name of the role. Must be unique and one of Admin, Technician or User.
+     * Name of the role. Must be unique and one of Admin, Technician or Cashier.
      */
     private String name;
 

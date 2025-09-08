@@ -3,12 +3,15 @@ package com.AAA.demo.controller;
 import com.AAA.demo.dto.CreateRefundDto;
 import com.AAA.demo.dto.RefundViewDto;
 import com.AAA.demo.service.RefundService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/refunds")
+@Validated
 public class RefundController {
 
     private final RefundService refundService;
@@ -18,7 +21,7 @@ public class RefundController {
     }
 
     @PostMapping
-    public ResponseEntity<RefundViewDto> create(@RequestBody CreateRefundDto dto) {
+    public ResponseEntity<RefundViewDto> create(@RequestBody @Valid CreateRefundDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(refundService.createRefund(dto));
     }
 

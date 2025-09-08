@@ -30,7 +30,7 @@ public class Refund {
     private Instant createdAt;
 
     // refund_items.refund_id is the FK
-    @MappedCollection(idColumn = "refund_id")
+    @MappedCollection(idColumn = "refund_id", keyColumn = "line_no")
     private List<RefundItem> items = new ArrayList<>();
 
     // getters/setters
