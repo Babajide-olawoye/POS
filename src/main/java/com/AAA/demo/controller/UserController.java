@@ -29,19 +29,18 @@ public class UserController {
      * Returns a list of all users.
      */
     @GetMapping
-    public List<UserDto> getAllUsers() {
-        return this.userService.getAll().stream().map(UserDto::fromUser).toList();
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAll());
     }
 
     /**
      * Retrieves a user by id.
      */
-    @GetMapping({"/{id}"})
+    @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
-        Optional<User> user = this.userService.getById(id);
-        return user.map(UserDto::fromUser)
-                   .map(ResponseEntity::ok)
-                   .orElse(ResponseEntity.notFound().build());
+        return userService.getById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     /**
@@ -49,8 +48,8 @@ public class UserController {
      */
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto) {
-        User createdUser = this.userService.create(userDto.toUser());
-        return ResponseEntity.ok(UserDto.fromUser(createdUser));
+        UserDto createdUser = this.userService.create(userDto);
+        return ResponseEntity.ok(createdUser);
     }
 
     /**
