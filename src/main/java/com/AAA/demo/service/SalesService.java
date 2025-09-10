@@ -1,7 +1,7 @@
 package com.AAA.demo.service;
 
 import com.AAA.demo.dto.CreateSaleDto;
-import com.AAA.demo.dto.CreateSaleItem;
+import com.AAA.demo.dto.CreateSaleItemDto;
 import com.AAA.demo.dto.SaleItemsViewDto;
 import com.AAA.demo.dto.SalesViewDto;
 import com.AAA.demo.entities.Product;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-//import java.math.RoundingMode;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +49,7 @@ public class SalesService {
         List<SaleItem> items = new ArrayList<>();
         BigDecimal subtotal = BigDecimal.ZERO;
 
-        for (CreateSaleItem it : dto.items()) {
+        for (CreateSaleItemDto it : dto.items()) {
             Product p = productRepo.findById(it.productId())
                     .orElseThrow(() -> new IllegalArgumentException("Product %d not found".formatted(it.productId())));
 
@@ -97,7 +96,7 @@ public class SalesService {
      * @throws IllegalArgumentException if the sale or product cannot be found
      */
     @Transactional
-    public SalesViewDto addItem(Long saleId, CreateSaleItem dto) {
+    public SalesViewDto addItem(Long saleId, CreateSaleItemDto dto) {
         Sales sale = salesRepository.findById(saleId)
                 .orElseThrow(() -> new IllegalArgumentException("Sale %d not found".formatted(saleId)));
 
@@ -170,7 +169,7 @@ public class SalesService {
 
         BigDecimal afterDiscount = subtotal.subtract(nvl(sale.getDiscount()));
         BigDecimal taxAmount = afterDiscount.multiply(nvl(sale.getTaxRate()))
-                .divide(BigDecimal.valueOf(100));
+                .divide(BigDecimal.valueOf(100), 2, BigDecimal.ROUND_UP);
         sale.setFinalAmount(afterDiscount.add(taxAmount));
     }
 

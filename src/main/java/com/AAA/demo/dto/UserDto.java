@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public record UserDto(
         Long id,
-        @NotNull(message = "User ID is required")
+        @NotNull(message = "User name is required")
         String name,
         @NotNull(message = "Email is required")
         @Email(message = "Email must be valid")

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
-public record CreateSaleItem(
+public record CreateSaleItemDto(
         @NotNull(message = "Product is required")
         Long productId,
         @Min(value = 1, message = "Minimum value must be 1")

@@ -1,7 +1,7 @@
 package com.AAA.demo.controller;
 
 import com.AAA.demo.dto.CreateSaleDto;
-import com.AAA.demo.dto.CreateSaleItem;
+import com.AAA.demo.dto.CreateSaleItemDto;
 import com.AAA.demo.dto.SalesViewDto;
 import com.AAA.demo.service.SalesService;
 import jakarta.validation.Valid;
@@ -26,7 +26,7 @@ public class SalesController {
     }
 
     @PostMapping("/{saleId}/items")
-    public ResponseEntity<SalesViewDto> addItem(@PathVariable Long saleId, @RequestBody @Valid CreateSaleItem dto) {
+    public ResponseEntity<SalesViewDto> addItem(@PathVariable Long saleId, @RequestBody @Valid CreateSaleItemDto dto) {
         return ResponseEntity.ok(salesService.addItem(saleId, dto));
     }
 
