@@ -49,6 +49,16 @@ public class ProductService {
     }
 
     /**
+     * Updates {@link Product} stock
+     */
+    public Product updateProductStock(String name, int stock) {
+        Product updatingProd = getByName(name);
+        updatingProd.setStock(updatingProd.getStock() + stock);
+
+        return this.productRepository.save(updatingProd);
+    }
+
+    /**
      * Updates {@link Product} cost price
      */
     public Product updateProductCost(String name, BigDecimal cost) {

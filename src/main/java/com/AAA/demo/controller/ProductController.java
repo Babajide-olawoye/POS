@@ -1,5 +1,6 @@
 package com.AAA.demo.controller;
 
+import com.AAA.demo.dto.UpdateProcductStockDto;
 import com.AAA.demo.dto.UpdateProductCostDto;
 import com.AAA.demo.dto.UpdateProductPriceDto;
 import com.AAA.demo.entities.Product;
@@ -70,6 +71,12 @@ public class ProductController {
     @PutMapping
     public ResponseEntity<Product> updateProductCost(@Valid @RequestBody UpdateProductCostDto request) {
         Product updated = productService.updateProductCost(request.name(), request.costPrice());
+        return ResponseEntity.ok(updated);
+    }
+
+    @PutMapping
+    public ResponseEntity<Product> updateProductStock(@Valid @RequestBody UpdateProcductStockDto request) {
+        Product updated = productService.updateProductStock(request.name(), request.stock());
         return ResponseEntity.ok(updated);
     }
 
