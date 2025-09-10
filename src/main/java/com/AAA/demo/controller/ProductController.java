@@ -1,7 +1,9 @@
 package com.AAA.demo.controller;
 
+import com.AAA.demo.dto.UpdateProductPriceDto;
 import com.AAA.demo.entities.Product;
 import com.AAA.demo.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +56,13 @@ public class ProductController {
     public ResponseEntity<Product> create(@RequestBody Product product) {
         Product created = productService.create(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
+    /** Updates product */
+    @PutMapping
+    public ResponseEntity<Product> updateProductPrice(@Valid @RequestBody UpdateProductPriceDto request) {
+        Product updated = productService.updateProductPrice(request.getName(), request.getCostPrice());
+        return ResponseEntity.ok(updated);
     }
 
     /** Delete a product by ID */
