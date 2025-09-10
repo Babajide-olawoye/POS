@@ -1,6 +1,7 @@
 package com.AAA.demo.service;
 
-import com.AAA.demo.dto.UserDto;
+import com.AAA.demo.dto.UserCreateDto;
+import com.AAA.demo.dto.UserViewDto;
 import com.AAA.demo.entities.User;
 import com.AAA.demo.repos.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,25 +34,25 @@ public class UserService {
     /**
      * Retrieves all users from the database.
      */
-    public List<UserDto> getAll() {
+    public List<UserViewDto> getAll() {
         return userRepository.findAll()
                 .stream()
-                .map(UserDto::fromUser)
+                .map(UserViewDto::fromUser)
                 .toList();
     }
 
     /**
      * Looks up a {@link User} by id.
      */
-    public Optional<UserDto> getById(Long id) {
+    public Optional<UserViewDto> getById(Long id) {
         return userRepository.findById(id)
-                .map(UserDto::fromUser);
+                .map(UserViewDto::fromUser);
     }
 
     /**
      * Creates a new user after hashing the supplied password.
      */
-    public UserDto create(UserDto dto) {
+    public UserViewDto create(UserCreateDto dto) {
         String hashed = dto.password() != null
                 ? passwordEncoder.encode(dto.password())
                 : null;
@@ -66,7 +67,7 @@ public class UserService {
         entity.setUpdatedDate(LocalDate.now());
 
         User saved = userRepository.save(entity);
-        return UserDto.fromUser(saved);
+        return UserViewDto.fromUser(saved);
     }
 
 

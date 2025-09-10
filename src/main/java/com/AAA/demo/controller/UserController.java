@@ -1,6 +1,7 @@
 package com.AAA.demo.controller;
 
-import com.AAA.demo.dto.UserDto;
+import com.AAA.demo.dto.UserCreateDto;
+import com.AAA.demo.dto.UserViewDto;
 import com.AAA.demo.entities.User;
 import com.AAA.demo.service.UserService;
 import jakarta.validation.Valid;
@@ -10,7 +11,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * REST controller exposing CRUD operations for {@link User} resources.
@@ -29,7 +29,7 @@ public class UserController {
      * Returns a list of all users.
      */
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUsers() {
+    public ResponseEntity<List<UserViewDto>> getAllUsers() {
         return ResponseEntity.ok(userService.getAll());
     }
 
@@ -37,7 +37,7 @@ public class UserController {
      * Retrieves a user by id.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserViewDto> getUserById(@PathVariable Long id) {
         return userService.getById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -47,8 +47,8 @@ public class UserController {
      * Creates a new user record.
      */
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto) {
-        UserDto createdUser = this.userService.create(userDto);
+    public ResponseEntity<UserViewDto> createUser(@RequestBody @Valid UserCreateDto userDto) {
+        UserViewDto createdUser = this.userService.create(userDto);
         return ResponseEntity.ok(createdUser);
     }
 
