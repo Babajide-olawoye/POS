@@ -10,7 +10,7 @@ public record SalesViewDto(
         BigDecimal discount,
         BigDecimal taxRate,
         BigDecimal finalAmount,
-        String paymentMethod,
+        PaymentMethod paymentMethod,
         Instant createdAt,
         List<SaleItemsViewDto> items
 ) {}

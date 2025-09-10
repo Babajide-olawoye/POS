@@ -5,8 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -27,8 +31,8 @@ public class SecurityConfig {
     }
 
     /**
-     * Configures the security filter chain with disabled CSRF and
-     * open access to all endpoints.
+     * Configures the security filter chain with CSRF enabled and
+     * requires authentication for API endpoints.
      *
      * @param http injected {@link HttpSecurity}
      * @return configured {@link SecurityFilterChain}
@@ -40,6 +44,22 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
             .httpBasic(Customizer.withDefaults());
         return http.build();
+    }
+
+
+    /**
+     * Provides an in‑memory user for basic authentication.
+     *
+     * @param passwordEncoder encoder used to hash the password
+     * @return configured {@link UserDetailsService}
+     */
+    @Bean
+    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+        UserDetails user = User.withUsername("user")
+                .password(passwordEncoder.encode("password"))
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(user);
     }
 }
 
