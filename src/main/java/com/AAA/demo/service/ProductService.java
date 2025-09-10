@@ -4,6 +4,7 @@ import com.AAA.demo.entities.Product;
 import com.AAA.demo.repos.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -35,6 +36,36 @@ public class ProductService {
      */
     public Product getById(Long id) {
         return this.productRepository.findById(id).orElse(null);
+    }
+
+    /**
+     * Updates {@link Product} price
+     */
+    public Product updateProductPrice(String name, BigDecimal price) {
+        Product updatingProd = getByName(name);
+        updatingProd.setPrice(price);
+
+        return this.productRepository.save(updatingProd);
+    }
+
+    /**
+     * Updates {@link Product} stock
+     */
+    public Product updateProductStock(String name, int stock) {
+        Product updatingProd = getByName(name);
+        updatingProd.setStock(updatingProd.getStock() + stock);
+
+        return this.productRepository.save(updatingProd);
+    }
+
+    /**
+     * Updates {@link Product} cost price
+     */
+    public Product updateProductCost(String name, BigDecimal cost) {
+        Product updatingProd = getByName(name);
+        updatingProd.setCostPrice(cost);
+
+        return this.productRepository.save(updatingProd);
     }
 
     /**

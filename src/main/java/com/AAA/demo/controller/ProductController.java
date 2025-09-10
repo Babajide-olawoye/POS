@@ -1,7 +1,11 @@
 package com.AAA.demo.controller;
 
+import com.AAA.demo.dto.UpdateProcductStockDto;
+import com.AAA.demo.dto.UpdateProductCostDto;
+import com.AAA.demo.dto.UpdateProductPriceDto;
 import com.AAA.demo.entities.Product;
 import com.AAA.demo.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +58,26 @@ public class ProductController {
     public ResponseEntity<Product> create(@RequestBody Product product) {
         Product created = productService.create(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
+    /** Updates product price by NAME */
+    @PutMapping
+    public ResponseEntity<Product> updateProductPrice(@Valid @RequestBody UpdateProductPriceDto request) {
+        Product updated = productService.updateProductPrice(request.name(), request.price());
+        return ResponseEntity.ok(updated);
+    }
+
+    /** Updates product cost by NAME */
+    @PutMapping
+    public ResponseEntity<Product> updateProductCost(@Valid @RequestBody UpdateProductCostDto request) {
+        Product updated = productService.updateProductCost(request.name(), request.costPrice());
+        return ResponseEntity.ok(updated);
+    }
+
+    @PutMapping
+    public ResponseEntity<Product> updateProductStock(@Valid @RequestBody UpdateProcductStockDto request) {
+        Product updated = productService.updateProductStock(request.name(), request.stock());
+        return ResponseEntity.ok(updated);
     }
 
     /** Delete a product by ID */
