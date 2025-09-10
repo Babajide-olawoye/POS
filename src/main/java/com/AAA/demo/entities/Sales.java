@@ -1,6 +1,7 @@
 // Sale.java (AGGREGATE ROOT)
 package com.AAA.demo.entities;
 
+import com.AAA.demo.dto.PaymentMethod;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
@@ -27,7 +28,7 @@ public class Sales {
     private BigDecimal finalAmount;
 
     @Column("payment_method")
-    private String paymentMethod;
+    private PaymentMethod paymentMethod;
 
     @Column("created_at")
     private Instant createdAt;
@@ -52,8 +53,8 @@ public class Sales {
     public BigDecimal getFinalAmount() { return finalAmount; }
     public void setFinalAmount(BigDecimal finalAmount) { this.finalAmount = finalAmount; }
 
-    public String getPaymentMethod() { return paymentMethod; }
-    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+    public PaymentMethod getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(PaymentMethod paymentMethod) { this.paymentMethod = paymentMethod; }
 
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }

@@ -1,9 +1,6 @@
 package com.AAA.demo.service;
 
-import com.AAA.demo.dto.CreateSaleDto;
-import com.AAA.demo.dto.CreateSaleItemDto;
-import com.AAA.demo.dto.SaleItemsViewDto;
-import com.AAA.demo.dto.SalesViewDto;
+import com.AAA.demo.dto.*;
 import com.AAA.demo.entities.Product;
 import com.AAA.demo.entities.Sales;
 import com.AAA.demo.entities.SaleItem;
@@ -79,7 +76,8 @@ public class SalesService {
         sale.setSubtotal(subtotal);
         sale.setDiscount(nvl(dto.discount()));
         sale.setTaxRate(nvl(dto.taxRate()));
-        sale.setPaymentMethod(dto.paymentMethod());
+        PaymentMethod paymentMethod = dto.paymentMethod();
+        sale.setPaymentMethod(paymentMethod);
         sale.setCreatedAt(Instant.now());
         recalcTotals(sale);
 
@@ -195,3 +193,5 @@ public class SalesService {
         );
     }
 }
+
+
