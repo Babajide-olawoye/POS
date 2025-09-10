@@ -43,7 +43,17 @@ public class ProductService {
      */
     public Product updateProductPrice(String name, BigDecimal price) {
         Product updatingProd = getByName(name);
-        updatingProd.setCostPrice(price);
+        updatingProd.setPrice(price);
+
+        return this.productRepository.save(updatingProd);
+    }
+
+    /**
+     * Updates {@link Product} cost price
+     */
+    public Product updateProductCost(String name, BigDecimal cost) {
+        Product updatingProd = getByName(name);
+        updatingProd.setCostPrice(cost);
 
         return this.productRepository.save(updatingProd);
     }

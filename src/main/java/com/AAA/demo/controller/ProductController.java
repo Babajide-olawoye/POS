@@ -1,5 +1,6 @@
 package com.AAA.demo.controller;
 
+import com.AAA.demo.dto.UpdateProductCostDto;
 import com.AAA.demo.dto.UpdateProductPriceDto;
 import com.AAA.demo.entities.Product;
 import com.AAA.demo.service.ProductService;
@@ -58,10 +59,17 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    /** Updates product */
+    /** Updates product price by NAME */
     @PutMapping
     public ResponseEntity<Product> updateProductPrice(@Valid @RequestBody UpdateProductPriceDto request) {
-        Product updated = productService.updateProductPrice(request.getName(), request.getCostPrice());
+        Product updated = productService.updateProductPrice(request.name(), request.price());
+        return ResponseEntity.ok(updated);
+    }
+
+    /** Updates product cost by NAME */
+    @PutMapping
+    public ResponseEntity<Product> updateProductCost(@Valid @RequestBody UpdateProductCostDto request) {
+        Product updated = productService.updateProductCost(request.name(), request.costPrice());
         return ResponseEntity.ok(updated);
     }
 

@@ -4,19 +4,13 @@ import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
-public class UpdateProductPriceDto {
+public record UpdateProductPriceDto (
     @NotBlank
-    private String name;
+    String name,
 
     @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
-    private BigDecimal costPrice;
+    BigDecimal price
 
-    public String getName() {
-        return name;
-    }
-
-    public BigDecimal getCostPrice() {
-        return costPrice;
-    }
-}
+    )
+{}
