@@ -1,6 +1,6 @@
 package com.AAA.demo.dto;
 
-import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -9,7 +9,7 @@ public record UpdateProcductStockDto(
         String name,
 
         @NotNull
-        @DecimalMin(value = "0.0", inclusive = false)
+        @Min(0)
         int stock
 
 ) {}

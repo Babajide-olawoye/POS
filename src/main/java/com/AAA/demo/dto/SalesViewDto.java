@@ -14,4 +14,3 @@ public record SalesViewDto(
         Instant createdAt,
         List<SaleItemsViewDto> items
 ) {}
-
