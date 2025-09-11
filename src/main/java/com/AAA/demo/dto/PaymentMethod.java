@@ -5,3 +5,4 @@ public enum PaymentMethod {
     CARD,
     TRANSFER
 }
+

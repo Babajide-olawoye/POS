@@ -12,3 +12,4 @@ public record CreateSaleItemDto(
         Integer quantity,
         BigDecimal unitPrice
 ) {}
+

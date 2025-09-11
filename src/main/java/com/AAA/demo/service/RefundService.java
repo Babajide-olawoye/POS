@@ -6,7 +6,6 @@ import com.AAA.demo.entities.Refund;
 import com.AAA.demo.entities.RefundItem;
 import com.AAA.demo.repos.ProductRepository;
 import com.AAA.demo.repos.RefundRepository;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

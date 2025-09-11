@@ -61,21 +61,21 @@ public class ProductController {
     }
 
     /** Updates product price by NAME */
-    @PutMapping
-    public ResponseEntity<Product> updateProductPrice(@Valid @RequestBody UpdateProductPriceDto request) {
+    @PutMapping("/{product}")
+    public ResponseEntity<Product> updateProductPrice(@PathVariable String _product, @Valid @RequestBody UpdateProductPriceDto request) {
         Product updated = productService.updateProductPrice(request.name(), request.price());
         return ResponseEntity.ok(updated);
     }
 
     /** Updates product cost by NAME */
-    @PutMapping
-    public ResponseEntity<Product> updateProductCost(@Valid @RequestBody UpdateProductCostDto request) {
+    @PutMapping("/update-cost/{product}")
+    public ResponseEntity<Product> updateProductCost( @PathVariable String _product, @Valid @RequestBody UpdateProductCostDto request) {
         Product updated = productService.updateProductCost(request.name(), request.costPrice());
         return ResponseEntity.ok(updated);
     }
 
-    @PutMapping
-    public ResponseEntity<Product> updateProductStock(@Valid @RequestBody UpdateProcductStockDto request) {
+    @PutMapping("/update-stock/{product}")
+    public ResponseEntity<Product> updateProductStock(@PathVariable String _product, @Valid @RequestBody UpdateProcductStockDto request) {
         Product updated = productService.updateProductStock(request.name(), request.stock());
         return ResponseEntity.ok(updated);
     }
